@@ -61,12 +61,7 @@ Prepare a **professional development environment** capable of:
 #### 🔐 Security
 
 - Root account secured
-- Dedicated database user created:
-  sadop_user
-
-markdown
-Copy code
-
+- Dedicated database user created: `sadop_user`
 - Restricted privileges applied
 
 #### 🐍 Python Environment
@@ -99,18 +94,55 @@ Copy code
 
 #### 📁 Project Structure
 
+```
 SADOP/
-├── db/
-├── monitoring/
-├── data/
-├── ml/
-├── rl/
-├── llm/
-├── api/
-└── report/
+ ├── db/                # MySQL schemas, scripts
+ │     └──sadop_db_backup.sql # back up database
+ ├── monitoring/        # For slow query logs, metrics scripts (future)
+ ├── data/              # Datasets exported from MySQL (CSV, etc.)
+ │     └── users.csv               # Optional: export of Users table
+ │     └── accounts.csv
+ │     └── transactions.csv
+ │     └── logs.csv
+ │     └── query_metrics.csv
+ │     └── slow_query_metrics_realistic.csv
+ │     └── slow_query_metrics.csv
+ |
+ |
+ ├── ml/                # ML features, model training
+ │     └── feature_engineering.ipynb  # Later
+ │     └── train_diagnostic_model.ipynb
+ ├── rl/                # RL index optimizer
+ │     └── rl_env_setup.ipynb
+ │     └── train_rl_agent.ipynb
+ ├── llm/               # LLM interface + LangChain
+ │     └── llm_connector.ipynb
+ │     └── queries_demo.ipynb
+ ├── api/               # Flask/FastAPI backend (optional)
+ │     └── app.py
+ └── report/            # Report, diagrams, screenshots
+       └── images/
+       └── report.docx / report.pdf
+ └── notebooks/         # Optional: keep all notebooks here instead of root
+       ├── 00_environment_check.ipynb
+       ├── 01_mysql_connection.ipynb
+       ├── 02_create_schema.ipynb
+       ├── 03_generate_fake_data.ipynb
+       ├── 04_generate_data_Frame.ipynb
+       ├── 06_MySQL_Monitoring_Setup.ipynb
+       ├── 07_Enable_Performance_Schema.ipynb
+       ├── 08_Capture Performance Metrics.ipynb
+       ├── 09_Simulate_Queries_and_Capture_Metrics.ipynb
+       ├── 10_Generate_Realistic_Slow_Queries_and_Metrics.ipynb
 
-yaml
+```
+
 Copy code
+
+#### 📚 Jupyter Notebooks
+
+- 01_environment_check.ipynb
+- 02_mysql_connection.ipynb
 
 ✅ **Milestone M1 completed**
 
@@ -126,13 +158,9 @@ Create a **realistic, large, and normalized database** able to:
 - Generate performance issues
 - Feed ML & RL models
 
----
-
 ### 🏦 Use Case
 
 **Banking System**
-
----
 
 ### 🧩 Database Design
 
@@ -151,15 +179,11 @@ Create a **realistic, large, and normalized database** able to:
 - Foreign keys enforced
 - Basic indexes added
 
----
-
 ### 🧠 Schema Implementation
 
 - SQL DDL scripts written
 - Tables created via Jupyter
 - User-based access (no root usage)
-
----
 
 ### 🧪 Data Generation
 
@@ -175,28 +199,26 @@ Create a **realistic, large, and normalized database** able to:
 - Accounts: ~20,000+
 - Transactions: **100,000+**
 - Logs: **50,000 – 100,000**
-
-✔ Data inserted:
-
-- In batches
-- Safely (no crashes)
+- Inserted **in batches**
 - With realistic timestamps and values
 
----
+#### CSV Export
+
+- Tables exported for offline use:
+  - `data/Users.csv`
+  - `data/Accounts.csv`
+  - `data/Transactions.csv`
+  - `data/Logs.csv`
 
 ### 💾 Backup
 
-- Full MySQL dump created:
-  db/sadop_db_backup.sql
-
-yaml
-Copy code
+- Full MySQL dump created: `db/sadop_db_backup.sql`
 
 ✅ **Milestone M2 completed**
 
 ---
 
-## 🧱 Phase 3 — Monitoring & Performance Data (M3) _(In Progress)_
+## 🧱 Phase 3 — Monitoring & Performance Data (M3)
 
 ### 🎯 Goal
 
@@ -205,9 +227,16 @@ Collect **real MySQL performance signals** for AI models.
 ### 🔍 Completed Steps
 
 - Enabled MySQL `slow_query_log`
-- Configured aggressive threshold:
-  - Queries slower than **0.5s** are logged
-- Located physical slow query log file
+- Aggressive threshold set (queries slower than **0.4s**)
+- Located slow query log file
+- Simulated realistic queries on CSV + captured:
+  - Execution time
+  - Rows examined
+  - Number of joins
+- Simulated missing indexes and traffic spikes
+- Saved metrics to CSV:
+  - `data/slow_query_metrics.csv`
+  - `data/slow_query_metrics_realistic.csv`
 
 This enables:
 
@@ -215,16 +244,27 @@ This enables:
 - Performance labeling
 - ML/RL feature extraction
 
+### 🔧 Jupyter Notebooks
+
+- 01_environment_check.ipynb
+- 02_mysql_connection.ipynb
+- 03_generate_fake_data.ipynb
+- 04_generate_data_Frame.ipynb
+- 06_MySQL_Monitoring_Setup.ipynb
+- 07_Enable_Performance_Schema.ipynb
+- 08_Capture Performance Metrics.ipynb
+- 09_Simulate_Queries_and_Capture_Metrics.ipynb
+- 10_Generate_Realistic_Slow_Queries_and_Metrics.ipynb
+
 ---
 
 ## 🧭 Next Steps
 
-- Enable `performance_schema`
-- Extract execution metrics
-- Generate ML-ready datasets
-- Train diagnostic models
+- **Task 41+ (M4):** Define features for ML pipeline
+- Train diagnostic ML models
 - Build RL index optimization agent
-- Add LLM natural language interface
+- Integrate LLM natural language interface
+- Evaluate and document end-to-end system
 
 ---
 
@@ -234,8 +274,9 @@ This project demonstrates:
 
 - Advanced database engineering
 - AI-driven optimization
-- Real-world workload simulation
+- Realistic workload simulation
 - End-to-end system integration
+- Use of **local LLM (Ollama)** to interact with MySQL
 
 ---
 
