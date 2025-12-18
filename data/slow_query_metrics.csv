@@ -1,0 +1,3 @@
+query_time,query
+218.769361,SET timestamp=1766051995; drop database sadop_db;
+32.603949,SET timestamp=1766052181; CREATE DATABASE IF NOT EXISTS sadop_db;
