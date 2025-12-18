@@ -96,55 +96,52 @@ Prepare a **professional development environment** capable of:
 
 ```
 SADOP/
- ├── db/                # MySQL schemas, scripts
- │     └──sadop_db_backup.sql # back up database
- ├── monitoring/        # For slow query logs, metrics scripts (future)
- ├── data/              # Datasets exported from MySQL (CSV, etc.)
- │     └── users.csv               # Optional: export of Users table
- │     └── accounts.csv
- │     └── transactions.csv
- │     └── logs.csv
- │     └── query_metrics.csv
- │     └── slow_query_metrics_realistic.csv
- │     └── slow_query_metrics.csv
- |
- |
- ├── ml/                # ML features, model training
- │     └── feature_engineering.ipynb  # Later
- │     └── train_diagnostic_model.ipynb
- ├── rl/                # RL index optimizer
- │     └── rl_env_setup.ipynb
- │     └── train_rl_agent.ipynb
- ├── llm/               # LLM interface + LangChain
- │     └── llm_connector.ipynb
- │     └── queries_demo.ipynb
- ├── api/               # Flask/FastAPI backend (optional)
- │     └── app.py
- └── report/            # Report, diagrams, screenshots
-       └── images/
-       └── report.docx / report.pdf
- └── notebooks/         # Optional: keep all notebooks here instead of root
-       ├── 00_environment_check.ipynb
-       ├── 01_mysql_connection.ipynb
-       ├── 02_create_schema.ipynb
-       ├── 03_generate_fake_data.ipynb
-       ├── 04_generate_data_Frame.ipynb
-       ├── 06_MySQL_Monitoring_Setup.ipynb
-       ├── 07_Enable_Performance_Schema.ipynb
-       ├── 08_Capture Performance Metrics.ipynb
-       ├── 09_Simulate_Queries_and_Capture_Metrics.ipynb
-       ├── 10_Generate_Realistic_Slow_Queries_and_Metrics.ipynb
+├── db/
+│ └── sadop_db_backup.sql
+├── monitoring/
+├── data/
+│ └── users.csv
+│ └── accounts.csv
+│ └── transactions.csv
+│ └── logs.csv
+│ └── query_metrics.csv
+│ └── slow_query_metrics_realistic.csv
+│ └── slow_query_metrics.csv
+│ └── slow_query_metrics_final.csv
+│ └── ml_features.csv
+│ └── y_train_reg.csv
+│ └── y_train_cls.csv
+│ └── y_test_cls.csv
+│ └── y_test_reg.csv
+│ └── X_test.csv
+│ └── X_train.csv
+├── ml/
+│ └── feature_engineering.ipynb
+│ └── train_diagnostic_model.ipynb
+├── rl/
+│ └── rl_env_setup.ipynb
+│ └── train_rl_agent.ipynb
+├── llm/
+│ └── llm_connector.ipynb
+│ └── queries_demo.ipynb
+├── api/
+│ └── app.py
+├── report/
+│ └── images/
+│ └── report.docx / report.pdf
+└── notebooks/
+├── 00_environment_check.ipynb
+├── 01_mysql_connection.ipynb
+├── 02_create_schema.ipynb
+├── 03_generate_fake_data.ipynb
+├── 04_generate_data_Frame.ipynb
+├── 06_MySQL_Monitoring_Setup.ipynb
+├── 07_Enable_Performance_Schema.ipynb
+├── 08_Capture_Performance_Metrics.ipynb
+├── 09_Simulate_Queries_and_Capture_Metrics.ipynb
+├── 10_Generate_Realistic_Slow_Queries_and_Metrics.ipynb
 
 ```
-
-Copy code
-
-#### 📚 Jupyter Notebooks
-
-- 01_environment_check.ipynb
-- 02_mysql_connection.ipynb
-
-✅ **Milestone M1 completed**
 
 ---
 
@@ -205,10 +202,10 @@ Create a **realistic, large, and normalized database** able to:
 #### CSV Export
 
 - Tables exported for offline use:
-  - `data/Users.csv`
-  - `data/Accounts.csv`
-  - `data/Transactions.csv`
-  - `data/Logs.csv`
+  - `data/users.csv`
+  - `data/accounts.csv`
+  - `data/transactions.csv`
+  - `data/logs.csv`
 
 ### 💾 Backup
 
@@ -234,9 +231,12 @@ Collect **real MySQL performance signals** for AI models.
   - Rows examined
   - Number of joins
 - Simulated missing indexes and traffic spikes
+- Captured CPU & memory usage per query
 - Saved metrics to CSV:
   - `data/slow_query_metrics.csv`
   - `data/slow_query_metrics_realistic.csv`
+  - `data/slow_query_metrics_final.csv`
+  - `data/ml_features.csv`
 
 This enables:
 
@@ -252,31 +252,87 @@ This enables:
 - 04_generate_data_Frame.ipynb
 - 06_MySQL_Monitoring_Setup.ipynb
 - 07_Enable_Performance_Schema.ipynb
-- 08_Capture Performance Metrics.ipynb
+- 08_Capture_Performance_Metrics.ipynb
 - 09_Simulate_Queries_and_Capture_Metrics.ipynb
 - 10_Generate_Realistic_Slow_Queries_and_Metrics.ipynb
 
 ---
 
+## 🧱 Phase 4 — Feature Engineering & ML Pipeline (Stage 10 → 13)
+
+### 🎯 Goal
+
+Prepare a **fully enhanced, ML-ready dataset** including:
+
+- Structural query features
+- Realistic performance metrics
+- System load (CPU/memory)
+- Adaptive slow query labeling
+- Normalized numeric features
+- Train/test split
+
+### 🔹 Stage 10: Generate Realistic Slow Queries & Metrics
+
+- Heavy queries with Users → Accounts → Transactions joins
+- Aggregated transactions with `SUM` per account
+- Simulated missing index by shuffling transactions
+- Traffic spikes: repeated queries 3x with slight time variability
+- Captured CPU & memory usage per query using Python `psutil`
+- Shuffled all queries
+- Saved as `data/slow_query_metrics_final.csv`
+
+### 🔹 Stage 11: Feature Engineering & Structural Encoding
+
+- Added structural features:
+  - `has_sum`, `has_group_by`, `has_where`
+  - `tables_count` (joins + 1)
+  - `query_length`
+- Saved dataset as `data/ml_features.csv`
+
+### 🔹 Stage 12: Exploratory Analysis & Linear Regression
+
+- Plotted histogram of `query_time` → identified fast vs slow clusters
+- Boxplot of `rows_examined` vs `is_slow` → confirmed correlation
+- Linear regression on numeric + structural features → identified key predictors
+- Validated that features can predict query performance
+
+### 🔹 Stage 13: Normalize & Train/Test Split
+
+- Log-transformed `query_time` to smooth gaps
+- Selected numeric + categorical features
+- Standardized numeric features using StandardScaler
+- Split dataset 80/20 train/test
+- Saved preprocessed datasets:
+  - `X_train.csv`, `X_test.csv`
+  - `y_train_reg.csv`, `y_test_reg.csv`
+  - `y_train_cls.csv`, `y_test_cls.csv`
+
+**Result:** Fully ML-ready dataset including **all performance, structural, and system metrics**.
+
+---
+
+## 📂 Files Added / Generated So Far
+
+- `data/users.csv`
+- `data/accounts.csv`
+- `data/transactions.csv`
+- `data/logs.csv`
+- `data/query_metrics.csv`
+- `data/slow_query_metrics.csv`
+- `data/slow_query_metrics_realistic.csv`
+- `data/slow_query_metrics_final.csv`
+- `data/ml_features.csv`
+- `db/sadop_db_backup.sql`
+
+---
+
 ## 🧭 Next Steps
 
-- **Task 41+ (M4):** Define features for ML pipeline
+- Task 41+ (M4): Define features for ML pipeline
 - Train diagnostic ML models
 - Build RL index optimization agent
 - Integrate LLM natural language interface
 - Evaluate and document end-to-end system
-
----
-
-## 🎓 Academic Value
-
-This project demonstrates:
-
-- Advanced database engineering
-- AI-driven optimization
-- Realistic workload simulation
-- End-to-end system integration
-- Use of **local LLM (Ollama)** to interact with MySQL
 
 ---
 
