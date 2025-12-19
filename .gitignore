@@ -16,11 +16,9 @@ __pycache__/
 .DS_Store
 Thumbs.db
 
-# Ignore database dumps (optional if you want)
-db/*.sql
 
-# Ignore data exports (optional)
-data/*.csv
+
+
 
 # Ignore logs
 monitoring/*.log
