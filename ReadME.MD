@@ -99,14 +99,15 @@ SADOP/
 ├── db/
 │ └── sadop_db_backup.sql
 ├── monitoring/
-│ └── (empty)
+│ ├── performance_schema_queries.sql
+│ └── slow_log_parser.py
 ├── data/
-│ ├── Accounts.csv
+│ ├── accounts.csv
+│ ├── generated_queries.csv
 │ ├── logs.csv
+│ ├── ml_features_clean.csv
 │ ├── ml_features.csv
-│ ├── query_metrics.csv
-│ ├── slow_query_metrics_final.csv
-│ ├── slow_query_metrics_realistic.csv
+│ ├── slow_query_metrics-Copy1.csv
 │ ├── slow_query_metrics.csv
 │ ├── transactions.csv
 │ ├── users.csv
@@ -117,22 +118,30 @@ SADOP/
 │ ├── y_train_cls.csv
 │ └── y_train_reg.csv
 ├── ML/
-│ └── (empty)
+│ ├── 1_Data Pipeline for AI .ipynb
+│ ├── 2_exploratory_analysis.ipynb
+│ ├── 3_Normalize_Numeric_Features _Train_Test Split.ipynb
+│ ├── 4_Verify Data Quality & Consistency.ipynb
+│ ├── 5_ML Diagnostic Engine — Predicting Query Performance.ipynb
+│ └── models/
+│     ├── logistic_regression.pkl
+│     └── random_forest.pkl
 ├── RL/
-│ ├── RL Environment for Query & Index Optimization.ipynb
-│ ├── EXPLAIN_Extraction.ipynb
-│ ├── Index Recommendation Engine.ipynb
-│ ├── RL_index_optimization_agent.ipynb
-│ ├── index_optimization_agent.zip
-│ └── rl_tensorboard/
-|         ├── PPO_2/
-|         │ └── events.out.tfevents.1766172103.DESKTOP-GK9TB81.1896.1
-|         ├── PPO_3/
-|         │ └── events.out.tfevents.1766172309.DESKTOP-GK9TB81.1896.2
-|         └── PPO_4/
-|         └── events.out.tfevents.1766174146.DESKTOP-GK9TB81.35060.0
+│ ├── 01_EXPLAIN_Extraction.ipynb
+│ ├── 02_Index Recommendation Engine.ipynb
+│ ├── 03_rl_index_optimization_agent.ipynb
+│ ├── model/
+│ │   └── index_optimization_agent.zip
+│ └── tensorboard/
+│     ├── PPO_2/
+│     │   └── events.out.tfevents.1766172103.DESKTOP-GK9TB81.1896.1
+│     ├── PPO_3/
+│     │   └── events.out.tfevents.1766172309.DESKTOP-GK9TB81.1896.2
+│     └── PPO_4/
+│         └── events.out.tfevents.1766174146.DESKTOP-GK9TB81.35060.0
 ├── llm/
-│ └── (empty)
+│ ├── prompt_templates.py
+│ └── sql_explainer.py
 ├── api/
 │ └── app.py
 ├── report/
@@ -141,19 +150,14 @@ SADOP/
 │ ├── 01_environment_check.ipynb
 │ ├── 02_mysql_connection.ipynb
 │ ├── 03_generate_fake_data.ipynb
-│ ├── 04_generate_data_Frame.ipynb
-│ ├── 05_Database_Backup.ipynb
-│ ├── 06_MySQL_Monitoring_Setup.ipynb
-│ ├── 07_Enable_Performance_Schema.ipynb
-│ ├── 08_Capture Performance Metrics.ipynb
-│ ├── 09_Simulate_Queries and Capture Metrics.ipynb
-│ ├── 10_Generate Realistic Slow Queries and Metrics.ipynb
-│ ├── 11_Data Pipeline for AI .ipynb
-│ ├── 12_Exploratory Analysis & Linear Regression.ipynb
-│ ├── 13_Normalize_Numeric_Features \_Train_Test Split.ipynb
-│ └── 14_Verify Data Quality & Consistency.ipynb
+│ ├── 04_load_csv_into_mysql.ipynb
+│ ├── 05_MySQL_Monitoring_Setup.ipynb
+│ ├── 06_Enable_Performance_Schema.ipynb
+│ ├── 07_Capture Performance Metrics.ipynb
+│ └── 08_Generate Realistic Slow Queries and Metrics.ipynb
 ├── .gitignore
 ├── Projet-Homework.pdf
+├── PROJECT_STRUCTURE.md
 └── ReadME.MD
 
 ```
