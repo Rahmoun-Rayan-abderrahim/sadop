@@ -123,22 +123,31 @@ SADOP/
 │ ├── 3_Normalize_Numeric_Features _Train_Test Split.ipynb
 │ ├── 4_Verify Data Quality & Consistency.ipynb
 │ ├── 5_ML Diagnostic Engine — Predicting Query Performance.ipynb
-│ └── models/
-│     ├── logistic_regression.pkl
-│     └── random_forest.pkl
+│ ├── models/
+│ │   ├── logistic_regression.pkl
+│ │   └── random_forest.pkl
+│ └── text.txt
 ├── RL/
+│ ├── 00_rl_index_optimization_agent.ipynb
 │ ├── 01_EXPLAIN_Extraction.ipynb
 │ ├── 02_Index Recommendation Engine.ipynb
-│ ├── 03_rl_index_optimization_agent.ipynb
-│ ├── model/
-│ │   └── index_optimization_agent.zip
-│ └── tensorboard/
+│ └── rl_tensorboard/
+│     ├── PPO_1/
+│     │   └── events.out.tfevents.1766342679.DESKTOP-GK9TB81.8128.0
 │     ├── PPO_2/
-│     │   └── events.out.tfevents.1766172103.DESKTOP-GK9TB81.1896.1
+│     │   └── events.out.tfevents.1766343461.DESKTOP-GK9TB81.8128.1
 │     ├── PPO_3/
-│     │   └── events.out.tfevents.1766172309.DESKTOP-GK9TB81.1896.2
-│     └── PPO_4/
-│         └── events.out.tfevents.1766174146.DESKTOP-GK9TB81.35060.0
+│     │   └── events.out.tfevents.1766343473.DESKTOP-GK9TB81.8128.2
+│     ├── PPO_4/
+│     │   └── events.out.tfevents.1766343521.DESKTOP-GK9TB81.45172.0
+│     ├── PPO_5/
+│     │   └── events.out.tfevents.1766343583.DESKTOP-GK9TB81.45172.1
+│     ├── PPO_6/
+│     │   └── events.out.tfevents.1766343645.DESKTOP-GK9TB81.45172.2
+│     ├── PPO_7/
+│     │   └── events.out.tfevents.1766343848.DESKTOP-GK9TB81.45172.3
+│     └── PPO_8/
+│         └── events.out.tfevents.1766352475.DESKTOP-GK9TB81.28192.0
 ├── llm/
 │ ├── prompt_templates.py
 │ └── sql_explainer.py
